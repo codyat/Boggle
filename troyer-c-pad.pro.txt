@@ -32,12 +32,12 @@ boggleletter(B,X,Y,C) :- nth0(N,B,C), XR is N/4, X is floor(XR), Y is mod(N,4).
 % helper(board, x, y, node(X, bool, subwords, nextletter), outputlist, already_exist)
 
 helper(B, Xcoord, Ycoord, node(X, true,_,_), [X], Rest) :- boggleletter(B,Xcoord,Ycoord,X),
-																														 not(member((Xcoord,Ycoord),Rest)).
+                                                           not(member((Xcoord,Ycoord),Rest)).
 																														 
-helper(B, Xcoord, Ycoord, node(X, _,S,_), [X|W], Rest) 	:- boggleletter(B,Xcoord,Ycoord,X),
-																														 adjacent(Xcoord, Ycoord, X1, Y1), 
-																														 not(member((Xcoord,Ycoord),Rest)),
-																														 helper(B, X1, Y1, S, W, [(Xcoord, Ycoord)|Rest]).
+helper(B, Xcoord, Ycoord, node(X, _,S,_), [X|W], Rest) :- boggleletter(B,Xcoord,Ycoord,X),
+                                                          adjacent(Xcoord, Ycoord, X1, Y1), 
+                                                          not(member((Xcoord,Ycoord),Rest)),
+                                                          helper(B, X1, Y1, S, W, [(Xcoord, Ycoord)|Rest]).
 																												
 helper(B, Xcoord, Ycoord, node(_,_,_,N), [C|W], Rest) :- helper(B, Xcoord, Ycoord, N, [C|W], Rest).
 
